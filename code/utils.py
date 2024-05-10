@@ -1,6 +1,40 @@
 import pandas as pd
 
 
+
+# Functions for the String to Integer conversion of dates
+
+def isLeap(date):
+    return int((((date[0] % 4) == 0) and ((date[0] % 100) != 0)) or ((date[0] % 400) == 0))
+    
+def leapNum(date):
+    num = 0
+    for i in range(2000, date[0]):
+        if bool(isLeap(date)):
+            num = num + 1
+    return num
+
+def daysPassed(date):
+    lengths = [31, 28 + isLeap(date), 31, 30, 31, 30, 31, 31, 30, 31, 30]
+    days = date[2]
+    for i in range(0, date[1]-1):
+        days = days + lengths[i]
+    return days
+
+def dateConverter(date):
+    return ((date[0] - 2000 - leapNum(date)) * 365 + (leapNum(date) * 366) + daysPassed(date))
+
+def StringToDate(string):
+    dateList = string.split('-')
+    dateListInt = [int(dateList[0]),int(dateList[1]),int(dateList[2])]
+    return dateConverter(dateListInt)
+
+
+
+
+
+
+
 def ratio_missing_values_column(df, column):
     """
     Function taking as input a dataframe and a column key, returning the ratio between the number of missing values and the column size and printing it in percentage
