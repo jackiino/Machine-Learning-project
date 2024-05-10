@@ -84,7 +84,6 @@ def complete_games_details(games_details, games):
     def get_season(row):
         return row['SEASON']
         
-    games_details.loc[:, 'OPPOSING_TEAM_ID'] = games_details.apply(get_opposing_team_id, axis=1)
     merged_df = pd.merge(games_details, games, on='GAME_ID', how='left')
     games_details.loc[:, 'LOCATION'] = merged_df.apply(get_location, axis=1)
     merged_df_season = pd.merge(games_details, games[['GAME_ID', 'SEASON']], on='GAME_ID', how='left')
