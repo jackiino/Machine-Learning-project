@@ -31,10 +31,6 @@ def StringToDate(string):
 
 
 
-
-
-
-
 def ratio_missing_values_column(df, column):
     """
     Function taking as input a dataframe and a column key, returning the ratio between the number of missing values and the column size and printing it in percentage
